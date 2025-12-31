@@ -1,0 +1,13 @@
+<svg viewBox="0 0 1024 768" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .lxt-bg { fill: #1a3a5c; }
+      .lxt-text { fill: #ffffff; }
+    </style>
+  </defs>
+  <rect class="lxt-bg" x="54" y="278" width="916" height="466"/>
+  <rect class="lxt-text" x="94" y="318" width="836" height="386"/>
+  <path class="lxt-bg" d="M 138 370 L 230 370 L 230 606 L 138 606 Z"/>
+  <path class="lxt-bg" d="M 330 450 L 480 320 L 630 450 L 480 580 Z"/>
+  <path class="lxt-bg" d="M 710 370 L 888 370 L 888 606 L 710 606 Z"/>
+</svg>
