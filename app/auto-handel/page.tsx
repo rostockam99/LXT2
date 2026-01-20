@@ -1,24 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import {
-  ChevronLeft,
-  Phone,
-  Mail,
-  X,
-  Info,
-  PenLine as Engine,
-  Fuel,
-  Calendar,
-  Facebook,
-  Instagram,
-  ChevronRight,
-} from "lucide-react"
+import { ChevronLeft, Phone, Mail, X, Info, PenLine as Engine, Fuel, Calendar, Facebook, Instagram, ChevronRight, Share2 } from "lucide-react"
 import { FooterNav } from "@/components/footer-nav"
 
 interface Car {
   id: number
+  slug: string
   title: string
   price: string
   year: number
@@ -35,6 +24,7 @@ interface Car {
 const cars: Car[] = [
   {
     id: 1,
+    slug: "fiat-scudo-2008",
     title: "Fiat Scudo 2008",
     price: "10 325 zł NETTO",
     year: 2008,
@@ -49,6 +39,7 @@ const cars: Car[] = [
   },
   {
     id: 2,
+    slug: "alfa-romeo-155",
     title: "Alfa Romeo 155 1.8 stan kolecjonerski",
     price: "27 500 zł",
     year: 1993,
@@ -64,6 +55,7 @@ const cars: Car[] = [
   },
   {
     id: 3,
+    slug: "honda-civic-viii",
     title: "Honda Civic VIII 2.2 UFO doinwestowany",
     price: "12 500 zł",
     year: 2006,
@@ -79,6 +71,7 @@ const cars: Car[] = [
   },
   {
     id: 4,
+    slug: "citroen-jumper",
     title: "Citroën Jumper",
     price: "39 700 PLN - do negocjacji",
     year: 2016,
@@ -94,6 +87,7 @@ const cars: Car[] = [
   },
   {
     id: 5,
+    slug: "mercedes-vito-111",
     title: "Mercedes-Benz Vito 111 CDI Tourer Base 447.701",
     price: "72 500 PLN - do negocjacji",
     year: 2018,
@@ -109,6 +103,7 @@ const cars: Car[] = [
   },
   {
     id: 6,
+    slug: "land-rover-discovery",
     title: "Land Rover Discovery",
     price: "77 900 PLN",
     year: 2013,
@@ -126,7 +121,45 @@ const cars: Car[] = [
 
 export default function AutoHandelPage() {
   const [selectedCar, setSelectedCar] = useState<Car | null>(null)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0) // Added gallery state
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [copied, setCopied] = useState(false)
+
+  // Handle URL hash on mount and hash change
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1)
+      if (hash) {
+        const car = cars.find(c => c.slug === hash)
+        if (car) {
+          setSelectedCar(car)
+          setCurrentImageIndex(0)
+        }
+      }
+    }
+    
+    handleHashChange()
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
+  // Update URL when car is selected
+  const openCar = (car: Car) => {
+    setSelectedCar(car)
+    setCurrentImageIndex(0)
+    window.history.pushState(null, '', `#${car.slug}`)
+  }
+
+  const closeCar = () => {
+    setSelectedCar(null)
+    window.history.pushState(null, '', window.location.pathname)
+  }
+
+  const copyCarLink = () => {
+    const url = `${window.location.origin}${window.location.pathname}#${selectedCar?.slug}`
+    navigator.clipboard.writeText(url)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   return (
     <main className="min-h-screen bg-background">
@@ -185,10 +218,7 @@ export default function AutoHandelPage() {
             {cars.map((car) => (
               <button
                 key={car.id}
-                onClick={() => {
-                  setSelectedCar(car)
-                  setCurrentImageIndex(0)
-                }}
+                onClick={() => openCar(car)}
                 className="group text-left p-4 rounded-xl border border-border hover:border-accent bg-card hover:bg-secondary transition-all duration-300 cursor-pointer"
               >
                 <div className="w-full h-48 rounded-lg bg-gradient-to-br from-primary/20 to-accent/20 border border-border/50 mb-4 overflow-hidden relative">
@@ -241,26 +271,40 @@ export default function AutoHandelPage() {
       {selectedCar && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto"
-          onClick={() => setSelectedCar(null)}
+          onClick={closeCar}
         >
           <div
             className="bg-background rounded-xl border border-border w-full max-w-3xl p-8 relative my-8 max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={() => setSelectedCar(null)}
-              className="absolute top-4 right-4 p-2 hover:bg-accent/20 rounded-lg transition-colors z-10 bg-background border border-border shadow-lg"
-            >
-              <X className="w-6 h-6 text-primary" />
-            </button>
+            <div className="absolute top-4 right-4 flex gap-2 z-10">
+              <button
+                onClick={copyCarLink}
+                className="p-2 hover:bg-accent/20 rounded-lg transition-colors bg-background border border-border shadow-lg"
+                title="Kopiuj link do auta"
+              >
+                <Share2 className="w-5 h-5 text-primary" />
+              </button>
+              <button
+                onClick={closeCar}
+                className="p-2 hover:bg-accent/20 rounded-lg transition-colors bg-background border border-border shadow-lg"
+              >
+                <X className="w-6 h-6 text-primary" />
+              </button>
+            </div>
+            {copied && (
+              <div className="absolute top-16 right-4 px-3 py-1 bg-green-500 text-white text-sm rounded-lg z-10">
+                Skopiowano link!
+              </div>
+            )}
 
-            <div className="relative w-full h-96 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-border mb-6 overflow-hidden group">
+            <div className="relative w-full h-96 rounded-xl bg-white border border-border mb-6 overflow-hidden group flex items-center justify-center">
               {selectedCar.images && selectedCar.images.length > 0 ? (
                 <>
                   <img
                     src={selectedCar.images[currentImageIndex] || "/placeholder.svg"}
                     alt={`${selectedCar.title} - zdjęcie ${currentImageIndex + 1}`}
-                    className="w-full h-full object-cover"
+                    className="max-w-full max-h-full object-contain"
                     onError={(e) => {
                       e.currentTarget.src = "/placeholder.svg?height=400&width=600"
                     }}

@@ -13,12 +13,7 @@ import {
   Wind,
   Cog,
   Search,
-  Radio,
-  Video,
-  Eye,
-  Radar,
   Target,
-  Car,
   X,
   Facebook,
   Instagram,
@@ -32,66 +27,33 @@ export default function WarsztatPage() {
   const mainServices = [
     {
       title: "Przeglądy",
-      description: "Przeglądy okresowe i diagnostyczne",
+      description: "Przeglądy przed zakupem pojazdu",
       icon: Search,
     },
     {
       title: "Hamulce",
-      description: "Naprawa i wymiana układu hamulcowego",
+      description: "Naprawa/wymiana układów hamulcowych",
       icon: Target,
     },
     {
       title: "Oleje/Filtry",
-      description: "Wymiana olejów i filtrów",
+      description: "Wymiana oleju i filtrów",
       icon: Droplets,
     },
     {
-      title: "Klimatyzacja",
-      description: "Serwis i naprawa klimatyzacji",
-      icon: Wind,
+      title: "Naprawy główne",
+      description: "Wymiana paska rozrządu, naprawy układów przeniesienia napędów, sprzęgło",
+      icon: Cog,
     },
     {
       title: "Zawieszenie",
-      description: "Naprawa i diagnostyka zawieszenia",
-      icon: Cog,
+      description: "Naprawa układu napędowego, naprawa/wymiana układu kierowniczego, naprawa podzespołów wspomagania, wymiana amortyzatorów",
+      icon: Wind,
     },
     {
       title: "Diagnostyka",
       description: "Diagnostyka komputerowa pojazdu",
       icon: Gauge,
-    },
-  ]
-
-  const additionalServices = [
-    {
-      title: "CB Radio",
-      description: "Montaż i serwis CB radio",
-      icon: Radio,
-    },
-    {
-      title: "Wideo Rejestratory",
-      description: "Instalacja kamer samochodowych",
-      icon: Video,
-    },
-    {
-      title: "Kamery Cofania",
-      description: "Montaż systemów cofania",
-      icon: Eye,
-    },
-    {
-      title: "Czujniki Parkowania",
-      description: "Instalacja czujników parkowania",
-      icon: Radar,
-    },
-    {
-      title: "Czujniki Martwego Pola",
-      description: "System ostrzegania martwego pola",
-      icon: Target,
-    },
-    {
-      title: "Wymiana Opon",
-      description: "Wymiana i wyważanie opon",
-      icon: Car,
     },
   ]
 
@@ -138,13 +100,18 @@ export default function WarsztatPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-28 pb-20 px-4 overflow-hidden">
+      <section className="relative pt-28 pb-12 px-4 overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-5xl sm:text-6xl font-bold mb-4 text-primary">Profesjonalny Warsztat</h2>
+          <div className="text-center mb-8">
+            <h2 className="text-5xl sm:text-6xl font-bold mb-6 text-primary">Profesjonalny Warsztat</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
+              Nasz warsztat oferuje kompleksową obsługę napraw pojazdów osobowych oraz ciężarowych do 3,5 tony. 
+              Dzięki doświadczonemu zespołowi mechaników jesteśmy w stanie szybko i skutecznie rozwiązać problemy z Twoim autem. 
+              Zapewniamy rzetelną diagnostykę, szybkie terminy i uczciwe ceny.
+            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={() => setIsContactModalOpen(true)}
@@ -154,7 +121,7 @@ export default function WarsztatPage() {
               </button>
               <a
                 href="#services"
-                className="px-8 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors"
+                className="px-8 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors bg-transparent"
               >
                 Nasze usługi
               </a>
@@ -193,61 +160,28 @@ export default function WarsztatPage() {
             })}
           </div>
 
-          {/* Additional Services */}
-          <div className="text-center mb-8">
-            <h4 className="text-2xl font-bold text-primary mb-2">Usługi Dodatkowe</h4>
-            <p className="text-muted-foreground">Rozszerzamy funkcjonalność Twojego pojazdu</p>
-          </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {additionalServices.map((service, index) => {
-              const Icon = service.icon
-              return (
-                <div
-                  key={index}
-                  className="group p-6 bg-background rounded-xl border border-border hover:border-accent transition-all duration-300"
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="p-3 bg-accent/10 rounded-lg group-hover:bg-accent/15 transition-colors">
-                      <Icon className="w-6 h-6 text-accent" />
-                    </div>
-                  </div>
-                  <h4 className="text-lg font-bold text-primary mb-2">{service.title}</h4>
-                  <p className="text-sm text-muted-foreground">{service.description}</p>
-                </div>
-              )
-            })}
-          </div>
+      {/* Second CTA Section */}
+      <section className="py-12 px-4 bg-primary/5">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-3xl sm:text-4xl font-bold mb-4 text-primary">Masz problem z autem? Wpadnij do nas!</h3>
+          <p className="text-lg text-muted-foreground mb-6">
+            Ogarniemy wszystko od drobnych napraw po większy serwis. Działamy szybko, konkretnie i bez naciągania. 
+            Twoje auto jest u nas w dobrych rękach.
+          </p>
+          <button
+            onClick={() => setIsContactModalOpen(true)}
+            className="px-10 py-4 bg-accent text-white rounded-lg font-bold text-lg hover:bg-accent/90 transition-colors shadow-lg"
+          >
+            Umów wizytę
+          </button>
         </div>
       </section>
 
       {/* Gallery Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-4xl font-bold text-primary mb-4">Nasza Baza</h3>
-            <p className="text-muted-foreground">Profesjonalna infrastruktura i nowoczesny sprzęt</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {galleryImages.map((image, index) => (
-              <div
-                key={index}
-                className="relative group overflow-hidden rounded-xl h-64 bg-gradient-to-br from-primary/20 to-accent/20 border border-border hover:border-accent transition-all duration-300"
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p className="text-lg font-bold">{image.title}</p>
-                    <p className="text-sm text-white/80">{image.desc}</p>
-                  </div>
-                </div>
-                <div className="absolute inset-0 bg-placeholder-pattern" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Contact Section */}
       <section className="py-20 px-4">

@@ -24,8 +24,8 @@ export default function WypozyczalniaPage() {
   const vehicles = [
     {
       name: "Citroen Berlingo",
-      image: "https://moredigi.stronazen.pl/lxt/wp-content/uploads/2025/05/berlingo.jpg",
-      imageTech: "https://moredigi.stronazen.pl/lxt/wp-content/uploads/2025/05/berlingo-dane.jpg",
+      image: "/images/citroen-20belingo.jpg",
+      dimensions: "1800 x 1200 mm",
       power: "90 KM",
       fuel: "7,1 l/100km",
       capacity: "900 kg",
@@ -39,8 +39,8 @@ export default function WypozyczalniaPage() {
     },
     {
       name: "Peugeot Boxer L1H1",
-      image: "https://moredigi.stronazen.pl/lxt/wp-content/uploads/2025/05/l1h1.jpg",
-      imageTech: "https://moredigi.stronazen.pl/lxt/wp-content/uploads/2025/05/l1h1-dane.jpg",
+      image: "/images/peugeot-20boxer-20l1h1.jpg",
+      dimensions: "2670 x 1662 mm",
       power: "110 KM",
       fuel: "7,9 l/100km",
       capacity: "1155 kg",
@@ -54,8 +54,8 @@ export default function WypozyczalniaPage() {
     },
     {
       name: "Peugeot Boxer L2H2",
-      image: "https://moredigi.stronazen.pl/lxt/wp-content/uploads/2025/05/l2h2.jpg",
-      imageTech: "https://moredigi.stronazen.pl/lxt/wp-content/uploads/2025/05/l2h2-dane.jpg",
+      image: "/images/peugeot-20boxer-20l2h2.jpg",
+      dimensions: "3120 x 1932 mm",
       power: "120 KM",
       fuel: "9,1 l/100km",
       capacity: "1375 kg",
@@ -69,8 +69,8 @@ export default function WypozyczalniaPage() {
     },
     {
       name: "Peugeot Boxer L3H2",
-      image: "https://moredigi.stronazen.pl/lxt/wp-content/uploads/2025/05/l3h2.jpg",
-      imageTech: "https://moredigi.stronazen.pl/lxt/wp-content/uploads/2025/05/l3h2-dane.jpg",
+      image: "/images/peugeot-20boxer-20l3h2.jpg",
+      dimensions: "3700 x 1932 mm",
       power: "190 KM",
       fuel: "9,3 l/100km",
       capacity: "1300 kg",
@@ -84,8 +84,8 @@ export default function WypozyczalniaPage() {
     },
     {
       name: "Peugeot Boxer L4H2",
-      image: "https://moredigi.stronazen.pl/lxt/wp-content/uploads/2025/05/l4h2.jpg",
-      imageTech: "https://moredigi.stronazen.pl/lxt/wp-content/uploads/2025/05/l4h2-dane.jpg",
+      image: "/images/peugeot-20boxer-20l4h2.jpg",
+      dimensions: "4050 x 1932 mm",
       power: "220 KM",
       fuel: "9,3 l/100km",
       capacity: "1300 kg",
@@ -100,8 +100,8 @@ export default function WypozyczalniaPage() {
     {
       name: "Mercedes Vito Tourer",
       image: "https://moredigi.stronazen.pl/lxt/wp-content/uploads/2025/05/mercedes.jpg",
-      imageTech: null,
-      power: "8-osobowy",
+      dimensions: "8-osobowy",
+      power: "114 KM",
       fuel: "-",
       capacity: "-",
       pricing: [
@@ -193,11 +193,11 @@ export default function WypozyczalniaPage() {
                 className="p-6 bg-background rounded-xl border border-border hover:border-accent transition-all duration-300 group"
               >
                 {/* Vehicle Image */}
-                <div className="relative overflow-hidden rounded-lg mb-6 h-48 bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
+                <div className="relative overflow-hidden rounded-lg mb-6 h-48 bg-white border border-border flex items-center justify-center">
                   <img
                     src={vehicle.image || "/placeholder.svg"}
                     alt={vehicle.name}
-                    className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300"
+                    className="max-w-full max-h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300"
                     onError={(e) => {
                       e.currentTarget.style.display = "none"
                     }}
