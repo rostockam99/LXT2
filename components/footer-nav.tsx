@@ -8,7 +8,7 @@ interface FooterNavProps {
 export function FooterNav({ currentPage }: FooterNavProps) {
   const navItems = [
     { label: "LXT Warsztat Samochodowy w Białymstoku", href: "/warsztat" },
-    { label: "LXT Usługi Przewozowe w Białymstoku", href: "/transport" },
+    { label: "LXT Car Painting", href: "/car-painting" },
     { label: "LXT Wypożyczalnia Busów w Białymstoku", href: "/wypozyczalnia" },
     { label: "LXT Auto Handel w Białymstoku", href: "/auto-handel" },
   ]
@@ -81,7 +81,18 @@ export function FooterNav({ currentPage }: FooterNavProps) {
         </div>
 
         <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          <p>© 2025 LXT Centrum Motoryzacyjne. Wszelkie prawa zastrzeżone.</p>
+          <p className="mb-2">© 2025 LXT Centrum Motoryzacyjne. Wszelkie prawa zastrzeżone.</p>
+          <p className="text-xs text-muted-foreground/60">
+            Strona wykonana przez{" "}
+            <a 
+              href="https://seoholic.pl" 
+              target="_blank" 
+              rel="noopener"
+              className="hover:text-primary transition-colors"
+            >
+              seoholic.pl
+            </a>
+          </p>
         </div>
       </div>
     </footer>
