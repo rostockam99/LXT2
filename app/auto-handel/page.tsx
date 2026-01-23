@@ -38,7 +38,7 @@ const cars: Car[] = [
   {
     id: 1,
     slug: "fiat-scudo-2008",
-    title: "Fiat Scudo 2008",
+    title: "Fiat Scudo",
     price: "12 700 PLN",
     saleType: "Faktura VAT 23%",
     year: 2008,
@@ -116,7 +116,7 @@ const cars: Car[] = [
   {
     id: 4,
     slug: "citroen-jumper",
-    title: "Citroen Jumper 2016",
+    title: "Citroen Jumper",
     price: "39 700 PLN",
     saleType: "Faktura VAT 23%",
     year: 2016,
@@ -178,9 +178,9 @@ const cars: Car[] = [
   {
     id: 7,
     slug: "bmw-530i-2023",
-    title: "BMW Seria 5 530i M Pakiet G30",
+    title: "BMW Seria 5 530i",
     price: "155 000 PLN",
-    saleType: "Faktura VAT 23%",
+    saleType: "VAT marża 0%",
     year: 2023,
     mileage: "23 000 km",
     fuel: "Benzyna",
