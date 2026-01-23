@@ -26,7 +26,7 @@ const cars: Car[] = [
     id: 1,
     slug: "fiat-scudo-2008",
     title: "Fiat Scudo 2008",
-    price: "10 325 PLN",
+    price: "12 700 PLN",
     year: 2008,
     mileage: "284 000 km",
     fuel: "Diesel",
