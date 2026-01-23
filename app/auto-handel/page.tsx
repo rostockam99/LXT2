@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import Head from "next/head"
 import { ChevronLeft, Phone, Mail, X, Info, PenLine as Engine, Fuel, Calendar, Facebook, Instagram, ChevronRight, Share2 } from "lucide-react"
 import { FooterNav } from "@/components/footer-nav"
 
@@ -10,15 +11,27 @@ interface Car {
   slug: string
   title: string
   price: string
+  saleType: string
   year: number
   mileage: string
   fuel: string
   transmission: string
   engine: string
   power: string
+  drive?: string
+  bodyType?: string
+  color?: string
+  doors?: number
+  seats?: number
+  vin?: string
+  regNumber?: string
+  country?: string
+  accidentFree?: boolean
+  ocValid?: string
+  techValid?: string
   features: string[]
   description: string
-  images: string[] // Added images array for gallery
+  images: string[]
 }
 
 const cars: Car[] = [
@@ -27,95 +40,196 @@ const cars: Car[] = [
     slug: "fiat-scudo-2008",
     title: "Fiat Scudo 2008",
     price: "12 700 PLN",
+    saleType: "Faktura VAT 23%",
     year: 2008,
     mileage: "284 000 km",
     fuel: "Diesel",
     transmission: "Manualna",
-    engine: "1.997 cm³",
-    power: "88 KM",
-    features: ["Białe", "4 drzwi", "3 miejsca", "Napęd przedni"],
-    description: "Fiat Scudo w dobrym stanie technicznym, idealny do pracy.",
+    engine: "1 997 cm³",
+    power: "88 KM (65 kW)",
+    drive: "Przedni",
+    bodyType: "Furgon",
+    color: "Biały",
+    doors: 4,
+    seats: 3,
+    vin: "ZFA27000064192795",
+    regNumber: "BI288CH",
+    country: "Polska",
+    ocValid: "08.2026",
+    features: ["Napęd przedni", "Serwisowany na bieżąco", "Aktualny przegląd", "Gotowy do jazdy"],
+    description: "Sprzedam samochód Fiat Scudo w dobrym stanie technicznym. Auto gotowe do jazdy, serwisowane na bieżąco. Aktualny przegląd techniczny oraz ubezpieczenie OC. Idealny do pracy.",
     images: ["/cars/a1.webp", "/cars/a2.webp", "/cars/a3.webp"],
   },
   {
     id: 2,
     slug: "alfa-romeo-155",
-    title: "Alfa Romeo 155 1.8 stan kolecjonerski",
+    title: "Alfa Romeo 155 T.Spark 1993",
     price: "27 500 PLN",
+    saleType: "Umowa kupna-sprzedaży",
     year: 1993,
     mileage: "160 000 km",
-    fuel: "Benzyna",
+    fuel: "Benzyna T.Spark",
     transmission: "Manualna",
-    engine: "1.773 cm³",
-    power: "126 KM",
-    features: ["CD", "MP3", "USB", "Klimatyzacja manualna", "Bezwypadkowy"],
-    description:
-      "Wyjątkowa Alfa Romeo 155 T.Spark - prawdziwa perełka dla koneserów. Jedyna taka w Polsce, odkupiona od drugiego właściciela - Włocha. W moich rękach od dwóch lat. Oryginalny niski przebieg. Doskonały stan kolekcjonerski.",
+    engine: "1 773 cm³",
+    power: "126 KM (93 kW)",
+    drive: "Przedni",
+    bodyType: "Sedan",
+    color: "Szary",
+    doors: 4,
+    seats: 5,
+    vin: "ZAR16700000061748",
+    regNumber: "WPR18427",
+    country: "Włochy",
+    accidentFree: true,
+    ocValid: "01.2026",
+    features: ["Klimatyzacja manualna", "Radio CD", "MP3", "USB audio", "Bezwypadkowy", "Dodatkowy komplet kół", "Części zapasowe w zestawie"],
+    description: "Odkryj czystą pasję włoskiej motoryzacji. Alfa Romeo 155 T.Spark to wyjątkowy klasyk dla prawdziwego entuzjasty. Samochód kupiony w salonie we Włoszech, od nowości w jednej rodzinie. Jedyny taki egzemplarz w Polsce. Oryginalny niski przebieg 160 000 km potwierdzony stanem pojazdu. Z modyfikacji jedynie nagłośnienie, reszta w pełni oryginalna. W zestawie dodatkowy komplet oryginalnych kół oraz mnóstwo części zapasowych.",
     images: ["/cars/b1.webp", "/cars/b2.webp", "/cars/b3.webp", "/cars/b4.webp", "/cars/b5.webp"],
   },
   {
     id: 3,
     slug: "honda-civic-viii",
-    title: "Honda Civic VIII 2.2 UFO doinwestowany",
+    title: "Honda Civic VIII 2.2 i-CTDi UFO",
     price: "12 500 PLN",
+    saleType: "Umowa kupna-sprzedaży",
     year: 2006,
-    mileage: "290 000 km",
-    fuel: "Diesel",
+    mileage: "289 000 km",
+    fuel: "Diesel i-CTDi",
     transmission: "Manualna",
-    engine: "2.204 cm³",
-    power: "140 KM",
-    features: ["Radio fabryczne", "ABS", "Poduszki powietrzne", "Komputer", "Klimatyzacja", "Elektryczne lusterka"],
-    description:
-      "Honda Civic VIII po pełnym serwisie. Nowa dwumasa kompletna ze sprzęgłem, tarcze i klocki hamulcowe, wszystkie elementy zawieszenia wymienione. Bardzo dynamiczny silnik, bez wycieków. Godna uwagi w tym budżecie.",
+    engine: "2 204 cm³",
+    power: "140 KM (103 kW)",
+    drive: "Przedni",
+    bodyType: "Hatchback",
+    color: "Srebrny",
+    doors: 5,
+    seats: 5,
+    vin: "SHHFK37606U006263",
+    regNumber: "BI377JS",
+    country: "Polska",
+    accidentFree: true,
+    ocValid: "08.2026",
+    techValid: "11.2025",
+    features: ["Klimatyzacja manualna", "ABS", "Poduszki powietrzne", "Komputer pokładowy", "Radio fabryczne", "Elektryczne szyby", "Elektryczne lusterka", "CD/MP3/USB", "Tapicerka welurowa", "Nowa dwumasa + sprzęgło", "Nowe tarcze przód", "Nowe klocki przód/tył", "Wymienione zawieszenie", "Serwis olejowy"],
+    description: "Honda Civic VIII 2.2 Diesel po pełnym serwisie wykonanym w naszym własnym warsztacie. Nowa dwumasa + kompletne sprzęgło, nowe tarcze przód, nowe klocki przód i tył, wymienione zużyte elementy zawieszenia, wykonany serwis olejowy. Silnik dynamiczny, bez wycieków. Bardzo dobrze utrzymany jak na swój przebieg. Przebieg udokumentowany w CEPiK. Praktyczny, dynamiczny hatchback gotowy do jazdy bez dodatkowych kosztów.",
     images: ["/cars/c1.webp", "/cars/c2.webp", "/cars/c3.webp", "/cars/c4.webp"],
   },
   {
     id: 4,
     slug: "citroen-jumper",
-    title: "Citroën Jumper",
+    title: "Citroen Jumper 2016",
     price: "39 700 PLN",
+    saleType: "Faktura VAT 23%",
     year: 2016,
-    mileage: "Zapytaj",
+    mileage: "Zapytaj o szczegóły",
     fuel: "Diesel",
     transmission: "Manualna",
-    engine: "2.0L",
-    power: "Zapytaj",
-    features: ["3 miejsca", "Biały", "Po serwisie olejowym", "Zimowe opony", "Używany"],
-    description:
-      "Citroën Jumper z 2016 roku po pełnym serwisie olejowym, filtry, zimowe opony, zawieszenie, wahacze. Wystawiamy fakturę VAT 23%. Aktualne ubezpieczenie OC oraz przegląd.",
+    engine: "2.0L HDi",
+    power: "Zapytaj o szczegóły",
+    drive: "Przedni",
+    bodyType: "Furgon",
+    color: "Biały",
+    seats: 3,
+    features: ["Po serwisie olejowym", "Wymienione filtry", "Opony zimowe", "Wymienione zawieszenie", "Wymienione wahacze", "Aktualny przegląd", "Aktualne OC"],
+    description: "Citroen Jumper z 2016 roku po pełnym serwisie olejowym, wymienione filtry, zimowe opony, zawieszenie i wahacze. Aktualne ubezpieczenie OC oraz przegląd techniczny. Gotowy do pracy.",
     images: ["/cars/d1.webp", "/cars/d2.webp", "/cars/d3.webp"],
   },
   {
     id: 5,
     slug: "mercedes-vito-111",
-    title: "Mercedes-Benz Vito 111 CDI Tourer Base 447.701",
+    title: "Mercedes-Benz Vito 111 CDI Tourer Base",
     price: "72 500 PLN",
+    saleType: "Faktura VAT 23%",
     year: 2018,
     mileage: "300 000 km",
-    fuel: "Diesel",
+    fuel: "Diesel CDI",
     transmission: "Manualna",
-    engine: "1.598 cm³",
+    engine: "1 598 cm³",
     power: "114 KM",
-    features: ["8-osobowy", "Srebrny", "4 drzwi", "2 komplety opon", "Używany"],
-    description:
-      "Mercedes Vito 8-osobowy w super stanie technicznym. Od nowości w naszych rękach, z polskiego salonu. Po serwisie olejowym, świeżo nabita klimatyzacja. 2 komplety opon, nowe zimówki.",
+    drive: "Przedni",
+    bodyType: "Van / Bus",
+    color: "Srebrny",
+    doors: 4,
+    seats: 8,
+    features: ["8-osobowy", "Z polskiego salonu", "Od nowości w jednych rękach", "Po serwisie olejowym", "Świeżo nabita klimatyzacja", "2 komplety opon", "Nowe opony zimowe"],
+    description: "Mercedes Vito 8-osobowy w super stanie technicznym. Od nowości w naszych rękach, z polskiego salonu. Po serwisie olejowym, świeżo nabita klimatyzacja. 2 komplety opon w zestawie, w tym nowe zimówki. Idealny bus rodzinny lub do przewozu osób.",
     images: ["/cars/e1.webp", "/cars/e2.webp", "/cars/e3.webp", "/cars/e4.webp"],
   },
   {
     id: 6,
     slug: "land-rover-discovery",
-    title: "Land Rover Discovery",
+    title: "Land Rover Discovery IV 3.0 TDV6",
     price: "90 000 PLN",
+    saleType: "Faktura VAT 23%",
     year: 2013,
     mileage: "182 000 km",
-    fuel: "Diesel",
+    fuel: "Diesel TDV6",
     transmission: "Automatyczna",
-    engine: "2.993 cm³",
+    engine: "2 993 cm³",
     power: "211 KM",
-    features: ["SUV", "Brązowy", "5 drzwi", "5 miejsc", "Używany"],
-    description:
-      "Land Rover Discovery IV na sprzedaż. Po serwisie olejowym, opony zimowe, możliwa faktura VAT. Z tyłu mieszczą się bez problemu 3 foteliki. Ładny, zadbany, bardzo dynamiczny motor 3.0.",
+    drive: "4x4 (AWD)",
+    bodyType: "SUV",
+    color: "Brązowy",
+    doors: 5,
+    seats: 5,
+    features: ["Napęd 4x4", "Po serwisie olejowym", "Opony zimowe", "Dynamiczny silnik 3.0", "Zadbany", "Miejsce na 3 foteliki z tyłu"],
+    description: "Land Rover Discovery IV na sprzedaż. Po serwisie olejowym, opony zimowe. Z tyłu mieszczą się bez problemu 3 foteliki dziecięce. Ładny, zadbany egzemplarz z bardzo dynamicznym silnikiem 3.0 TDV6. Prawdziwy terenowiec w eleganckim wydaniu.",
     images: ["/cars/f1.webp", "/cars/f2.webp", "/cars/f3.webp"],
+  },
+  {
+    id: 7,
+    slug: "bmw-530i-2023",
+    title: "BMW Seria 5 530i M Pakiet G30",
+    price: "155 000 PLN",
+    saleType: "Faktura VAT 23%",
+    year: 2023,
+    mileage: "23 000 km",
+    fuel: "Benzyna",
+    transmission: "Automatyczna",
+    engine: "1 998 cm³",
+    power: "245 KM",
+    drive: "Tylny (RWD)",
+    bodyType: "Sedan",
+    color: "Czarny",
+    doors: 4,
+    seats: 5,
+    vin: "Na miejscu",
+    regNumber: "WPR9614T",
+    accidentFree: true,
+    features: [
+      "Pakiet M",
+      "Napęd tylny",
+      "Tapicerka skórzana",
+      "Klimatyzacja 4-strefowa",
+      "Asystent parkowania",
+      "Czujniki parkowania przód/tył",
+      "Asystent zmiany pasa",
+      "Tempomat aktywny",
+      "Domykanie drzwi",
+      "Apple CarPlay",
+      "Android Auto",
+      "Reflektory LED",
+      "Nawigacja satelitarna",
+      "Ekran dotykowy",
+      "Keyless Go",
+      "Start/Stop bez kluczyka",
+      "Sportowe fotele",
+      "Podgrzewane fotele",
+      "Pamięć ustawień fotela",
+      "Kierownica sportowa skórzana",
+      "Felgi aluminiowe 19 cali",
+      "Zawieszenie sportowe",
+      "System ostrzegania przed kolizją",
+      "Asystent hamowania awaryjnego",
+      "Rozpoznawanie znaków drogowych",
+      "Wykrywanie zmęczenia kierowcy",
+      "ABS", "ESP", "Isofix",
+      "Poduszki powietrzne przód/bok/kurtyny",
+      "Bezwypadkowy",
+      "Dodatkowy komplet felg zimowych",
+      "Gumowe dywaniki",
+    ],
+    description: "BMW 530i napęd tylny z 2023 roku w bardzo dobrym stanie technicznym i wizualnym. Samochód z niskim przebiegiem 23 000 km, użytkowany prywatnie. Generacja G30, Pakiet M, pełne wyposażenie premium. Klimatyzacja czterostrefowa, wszystkie systemy asystentów jazdy, tapicerka skórzana, sportowe fotele z pamięcią. W zestawie dodatkowy komplet aluminiowych felg zimowych oraz gumowe dywaniki. Samochód nie wymaga żadnego wkładu finansowego. Idealny dla osoby szukającej nowoczesnego, dynamicznego i komfortowego auta.",
+    images: Array.from({ length: 26 }, (_, i) => `/cars/bmw-530i/${i + 1}.webp`),
   },
 ]
 
@@ -160,6 +274,26 @@ export default function AutoHandelPage() {
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
+
+  // Update document title and meta when car is selected
+  useEffect(() => {
+    if (selectedCar) {
+      document.title = `${selectedCar.title} - ${selectedCar.price} | LXT Auto Handel`
+      
+      // Update OG meta tags dynamically
+      const ogTitle = document.querySelector('meta[property="og:title"]')
+      const ogDesc = document.querySelector('meta[property="og:description"]')
+      const ogImage = document.querySelector('meta[property="og:image"]')
+      const ogUrl = document.querySelector('meta[property="og:url"]')
+      
+      if (ogTitle) ogTitle.setAttribute('content', `${selectedCar.title} - ${selectedCar.price}`)
+      if (ogDesc) ogDesc.setAttribute('content', selectedCar.description)
+      if (ogImage && selectedCar.images[0]) ogImage.setAttribute('content', selectedCar.images[0])
+      if (ogUrl) ogUrl.setAttribute('content', `https://lxt.pl/auto-handel#${selectedCar.slug}`)
+    } else {
+      document.title = "Auto Handel Białystok | LXT Centrum Motoryzacyjne"
+    }
+  }, [selectedCar])
 
   return (
     <main className="min-h-screen bg-background">
@@ -242,7 +376,12 @@ export default function AutoHandelPage() {
                 <h3 className="font-bold text-lg text-primary mb-2 group-hover:text-accent transition-colors">
                   {car.title}
                 </h3>
-                <p className="text-2xl font-bold text-green-600 mb-3">{car.price}</p>
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  <p className="text-2xl font-bold text-green-600">{car.price}</p>
+                  <span className="px-2 py-0.5 bg-accent/10 text-accent rounded text-xs font-medium">
+                    {car.saleType}
+                  </span>
+                </div>
 
                 {/* Quick Stats */}
                 <div className="space-y-2 text-sm text-muted-foreground">
@@ -374,9 +513,14 @@ export default function AutoHandelPage() {
 
             {/* Car Title and Price */}
             <h2 className="text-3xl font-bold text-primary mb-2">{selectedCar.title}</h2>
-            <p className="text-3xl font-bold text-green-600 mb-6">{selectedCar.price}</p>
+            <div className="flex flex-wrap items-center gap-4 mb-6">
+              <p className="text-3xl font-bold text-green-600">{selectedCar.price}</p>
+              <span className="px-3 py-1 bg-accent text-white rounded-full text-sm font-semibold">
+                {selectedCar.saleType}
+              </span>
+            </div>
 
-            {/* Specs Grid */}
+            {/* Main Specs Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 pb-6 border-b border-border">
               <div>
                 <p className="text-xs text-muted-foreground mb-1">ROK PRODUKCJI</p>
@@ -402,11 +546,81 @@ export default function AutoHandelPage() {
                 <p className="text-xs text-muted-foreground mb-1">MOC</p>
                 <p className="font-bold text-primary">{selectedCar.power}</p>
               </div>
+              {selectedCar.drive && (
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">NAPĘD</p>
+                  <p className="font-bold text-primary">{selectedCar.drive}</p>
+                </div>
+              )}
+              {selectedCar.bodyType && (
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">NADWOZIE</p>
+                  <p className="font-bold text-primary">{selectedCar.bodyType}</p>
+                </div>
+              )}
+            </div>
+
+            {/* Additional Details */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 pb-6 border-b border-border">
+              {selectedCar.color && (
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">KOLOR</p>
+                  <p className="font-bold text-primary">{selectedCar.color}</p>
+                </div>
+              )}
+              {selectedCar.doors && (
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">DRZWI</p>
+                  <p className="font-bold text-primary">{selectedCar.doors}</p>
+                </div>
+              )}
+              {selectedCar.seats && (
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">MIEJSCA</p>
+                  <p className="font-bold text-primary">{selectedCar.seats}</p>
+                </div>
+              )}
+              {selectedCar.country && (
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">POCHODZENIE</p>
+                  <p className="font-bold text-primary">{selectedCar.country}</p>
+                </div>
+              )}
+              {selectedCar.accidentFree && (
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">BEZWYPADKOWY</p>
+                  <p className="font-bold text-green-600">Tak</p>
+                </div>
+              )}
+              {selectedCar.ocValid && (
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">OC WAŻNE DO</p>
+                  <p className="font-bold text-primary">{selectedCar.ocValid}</p>
+                </div>
+              )}
+              {selectedCar.techValid && (
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">PRZEGLĄD DO</p>
+                  <p className="font-bold text-primary">{selectedCar.techValid}</p>
+                </div>
+              )}
+              {selectedCar.regNumber && (
+                <div>
+                  <p className="text-xs text-muted-foreground mb-1">NR REJESTR.</p>
+                  <p className="font-bold text-primary">{selectedCar.regNumber}</p>
+                </div>
+              )}
+            </div>
+
+            {/* Description */}
+            <div className="mb-6 pb-6 border-b border-border">
+              <p className="font-bold text-primary mb-3">Opis:</p>
+              <p className="text-muted-foreground leading-relaxed">{selectedCar.description}</p>
             </div>
 
             {/* Features */}
             <div className="mb-6">
-              <p className="font-bold text-primary mb-3">Wyposażenie:</p>
+              <p className="font-bold text-primary mb-3">Wyposażenie i cechy:</p>
               <div className="flex flex-wrap gap-2">
                 {selectedCar.features.map((feature, idx) => (
                   <span key={idx} className="px-3 py-1 bg-secondary text-primary rounded-full text-sm font-medium">

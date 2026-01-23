@@ -31,6 +31,20 @@ export const metadata: Metadata = {
     siteName: "LXT Centrum Motoryzacyjne",
     title: "LXT Centrum Motoryzacyjne Białystok",
     description: "Kompleksowe usługi motoryzacyjne - warsztat, wynajem, car painting, auto handel",
+    images: [
+      {
+        url: "/images/chatgpt-20image-204-20gru-202025-2c-2016-33-11.png",
+        width: 1200,
+        height: 630,
+        alt: "LXT Centrum Motoryzacyjne - Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "LXT Centrum Motoryzacyjne Białystok",
+    description: "Kompleksowe usługi motoryzacyjne - warsztat, wynajem, car painting, auto handel",
+    images: ["/images/chatgpt-20image-204-20gru-202025-2c-2016-33-11.png"],
   },
   generator: "v0.app",
   icons: {
