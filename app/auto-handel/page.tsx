@@ -378,6 +378,9 @@ export default function AutoHandelPage() {
                 </h3>
                 <div className="flex flex-wrap items-center gap-2 mb-3">
                   <p className="text-2xl font-bold text-green-600">{car.price}</p>
+                   <span className="px-2 py-0.5 bg-accent/10 text-accent rounded text-xs font-medium">
+                    {car.saleType}
+                  </span>
                 </div>
 
                 {/* Quick Stats */}
