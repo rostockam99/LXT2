@@ -38,7 +38,7 @@ const cars: Car[] = [
   {
     id: 1,
     slug: "fiat-scudo-2008",
-    title: "Fiat Scudo",
+    title: "Fiat Scudo 2008",
     price: "12 700 PLN",
     saleType: "Faktura VAT 23%",
     year: 2008,
@@ -116,7 +116,7 @@ const cars: Car[] = [
   {
     id: 4,
     slug: "citroen-jumper",
-    title: "Citroen Jumper",
+    title: "Citroen Jumper 2016",
     price: "39 700 PLN",
     saleType: "Faktura VAT 23%",
     year: 2016,
@@ -158,7 +158,7 @@ const cars: Car[] = [
     id: 6,
     slug: "land-rover-discovery",
     title: "Land Rover Discovery IV 3.0 TDV6",
-    price: "65 000 PLN",
+    price: "90 000 PLN",
     saleType: "Faktura VAT 23%",
     year: 2013,
     mileage: "182 000 km",
@@ -178,9 +178,9 @@ const cars: Car[] = [
   {
     id: 7,
     slug: "bmw-530i-2023",
-    title: "BMW Seria 5 530i",
+    title: "BMW Seria 5 530i M Pakiet G30",
     price: "155 000 PLN",
-    saleType: "VAT marża 0%",
+    saleType: "Faktura VAT 23%",
     year: 2023,
     mileage: "23 000 km",
     fuel: "Benzyna",
@@ -370,6 +370,11 @@ export default function AutoHandelPage() {
                       <Engine className="w-16 h-16 text-primary/40 group-hover:text-primary/60 transition-all group-hover:scale-110" />
                     </div>
                   )}
+                  {car.seats && car.seats >= 8 && (
+                    <span className="absolute bottom-2 left-2 px-2 py-0.5 bg-primary/80 text-primary-foreground rounded text-xs font-medium backdrop-blur-sm">
+                      {car.seats} osobowy
+                    </span>
+                  )}
                 </div>
 
                 {/* Car Info */}
@@ -378,7 +383,7 @@ export default function AutoHandelPage() {
                 </h3>
                 <div className="flex flex-wrap items-center gap-2 mb-3">
                   <p className="text-2xl font-bold text-green-600">{car.price}</p>
-                   <span className="px-2 py-0.5 bg-accent/10 text-accent rounded text-xs font-medium">
+                  <span className="px-2 py-0.5 bg-accent/10 text-accent rounded text-xs font-medium">
                     {car.saleType}
                   </span>
                 </div>
