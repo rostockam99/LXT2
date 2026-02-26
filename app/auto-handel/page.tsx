@@ -158,7 +158,7 @@ const cars: Car[] = [
     id: 6,
     slug: "land-rover-discovery",
     title: "Land Rover Discovery IV 3.0 TDV6",
-    price: "90 000 PLN",
+    price: "59 999 PLN",
     saleType: "Faktura VAT 23%",
     year: 2013,
     mileage: "182 000 km",
